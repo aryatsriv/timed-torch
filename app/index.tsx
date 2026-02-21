@@ -135,59 +135,51 @@ export default function TorchHomeScreen() {
 								)}
 							</View>
 							<View style={styles.timerPickerRow}>
-								<View style={styles.timerPicker}>
-									<Text style={styles.timerUnitLabel}>HH</Text>
-									<View style={styles.timerInputRow}>
-										<TextInput
-											value={hoursText}
-											onChangeText={(value) => setHoursText(value.replace(/[^0-9]/g, ''))}
-											onBlur={() => {
-												const normalized = normalizeValue(hoursText, 23);
-												setTimer((prev) => ({ ...prev, hours: normalized.numeric }));
-												setHoursText(normalized.text);
-											}}
-											keyboardType="number-pad"
-											maxLength={2}
-											style={styles.timerInput}
-											selectTextOnFocus
-										/>
-									</View>
+								<View style={styles.timerInputRow}>
+									<TextInput
+										value={hoursText}
+										onChangeText={(value) => setHoursText(value.replace(/[^0-9]/g, ''))}
+										onBlur={() => {
+											const normalized = normalizeValue(hoursText, 23);
+											setTimer((prev) => ({ ...prev, hours: normalized.numeric }));
+											setHoursText(normalized.text);
+										}}
+										keyboardType="number-pad"
+										maxLength={2}
+										style={styles.timerInput}
+										selectTextOnFocus
+									/>
 								</View>
-								<View style={styles.timerPicker}>
-									<Text style={styles.timerUnitLabel}>MM</Text>
-									<View style={styles.timerInputRow}>
-										<TextInput
-											value={minutesText}
-											onChangeText={(value) => setMinutesText(value.replace(/[^0-9]/g, ''))}
-											onBlur={() => {
-												const normalized = normalizeValue(minutesText, 59);
-												setTimer((prev) => ({ ...prev, minutes: normalized.numeric }));
-												setMinutesText(normalized.text);
-											}}
-											keyboardType="number-pad"
-											maxLength={2}
-											style={styles.timerInput}
-											selectTextOnFocus
-										/>
-									</View>
+								<View style={styles.timerInputRow}>
+									<TextInput
+										value={minutesText}
+										onChangeText={(value) => setMinutesText(value.replace(/[^0-9]/g, ''))}
+										onBlur={() => {
+											const normalized = normalizeValue(minutesText, 59);
+											setTimer((prev) => ({ ...prev, minutes: normalized.numeric }));
+											setMinutesText(normalized.text);
+										}}
+										keyboardType="number-pad"
+										maxLength={2}
+										style={styles.timerInput}
+										selectTextOnFocus
+									/>
 								</View>
-								<View style={styles.timerPicker}>
-									<Text style={styles.timerUnitLabel}>SS</Text>
-									<View style={styles.timerInputRow}>
-										<TextInput
-											value={secondsText}
-											onChangeText={(value) => setSecondsText(value.replace(/[^0-9]/g, ''))}
-											onBlur={() => {
-												const normalized = normalizeValue(secondsText, 59);
-												setTimer((prev) => ({ ...prev, seconds: normalized.numeric }));
-												setSecondsText(normalized.text);
-											}}
-											keyboardType="number-pad"
-											maxLength={2}
-											style={styles.timerInput}
-											selectTextOnFocus
-										/>
-									</View>
+								<View style={styles.timerInputRow}>
+									<TextInput
+										value={secondsText}
+										onChangeText={(value) => setSecondsText(value.replace(/[^0-9]/g, ''))}
+										onBlur={() => {
+											const normalized = normalizeValue(secondsText, 59);
+											setTimer((prev) => ({ ...prev, seconds: normalized.numeric }));
+											setSecondsText(normalized.text);
+										}}
+										keyboardType="number-pad"
+										maxLength={2}
+										style={styles.timerInput}
+										selectTextOnFocus
+									/>
+
 								</View>
 							</View>
 						</View>
@@ -216,7 +208,7 @@ export default function TorchHomeScreen() {
 					<Text style={styles.footerMeta}>Audit log enabled</Text>
 				</View>
 			</View>
-		</SafeAreaView>
+		</SafeAreaView >
 	);
 }
 
@@ -396,18 +388,11 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 	},
-	timerPicker: {
-		flex: 1,
-		marginHorizontal: 4,
-		borderWidth: 2,
-		borderColor: '#1E2A3A',
-		backgroundColor: '#FFFFFF',
-	},
 	timerInputRow: {
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'center',
-		paddingHorizontal: 6,
+		paddingHorizontal: 8,
 		paddingVertical: 6,
 	},
 	timerInput: {
