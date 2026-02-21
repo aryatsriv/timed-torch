@@ -205,7 +205,6 @@ export default function TorchHomeScreen() {
 
 				<View style={styles.footerPanel}>
 					<Text style={styles.footerText}>SYS-ID TT-OPS-01</Text>
-					<Text style={styles.footerMeta}>Audit log enabled</Text>
 				</View>
 			</View>
 		</SafeAreaView >
