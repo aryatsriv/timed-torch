@@ -1,104 +1,17 @@
-import React, { useCallback, useEffect, useRef } from 'react';
-import {
-	FlatList,
-	NativeScrollEvent,
-	NativeSyntheticEvent,
-	Platform,
-	StyleSheet,
-	Text,
-	View,
-} from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import { COLORS, TIMER_CONSTANTS } from '../constants/theme';
 import { TimerState } from '../types';
+import { WheelPicker } from './MissionTimer/WheelPicker';
 
 interface MissionTimerProps {
 	isTorchOn: boolean;
 	timer: TimerState;
 	setTimer: React.Dispatch<React.SetStateAction<TimerState>>;
-	selectedDurationSeconds: number;
 	remainingSeconds: number;
 }
 
-const ITEM_HEIGHT = 50;
-const VISIBLE_ITEMS = 3;
-const CONTAINER_HEIGHT = ITEM_HEIGHT * VISIBLE_ITEMS;
-
-const WheelPicker = ({
-	data,
-	value,
-	onValueChange,
-	disabled,
-}: {
-	data: string[];
-	value: number;
-	onValueChange: (val: number) => void;
-	disabled: boolean;
-}) => {
-	const flatListRef = useRef<FlatList>(null);
-	const isInitialMount = useRef(true);
-
-	// Add padding items for smooth scrolling
-	const extendedData = ['', ...data, ''];
-
-	// Sync scroll position with value changes (for countdown)
-	useEffect(() => {
-		if (isInitialMount.current) {
-			isInitialMount.current = false;
-			return;
-		}
-		
-		// When disabled (counting down), we programmatically scroll
-		if (disabled) {
-			flatListRef.current?.scrollToIndex({
-				index: value,
-				animated: true,
-				viewPosition: 0,
-			});
-		}
-	}, [value, disabled]);
-
-	const onMomentumScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-		if (disabled) return;
-		const index = Math.round(event.nativeEvent.contentOffset.y / ITEM_HEIGHT);
-		if (index >= 0 && index < data.length) {
-			onValueChange(index);
-		}
-	};
-
-	return (
-		<View style={[styles.wheelContainer, disabled && styles.disabledWheel]}>
-			<FlatList
-				ref={flatListRef}
-				data={extendedData}
-				keyExtractor={(_, index) => index.toString()}
-				renderItem={({ item, index }) => (
-					<View style={styles.itemWrapper}>
-						<Text
-							style={[
-								styles.itemText,
-								index - 1 === value && styles.selectedItemText,
-							]}
-						>
-							{item}
-						</Text>
-					</View>
-				)}
-				showsVerticalScrollIndicator={false}
-				snapToInterval={ITEM_HEIGHT}
-				snapToAlignment="start"
-				decelerationRate="fast"
-				onMomentumScrollEnd={onMomentumScrollEnd}
-				initialScrollIndex={value}
-				getItemLayout={(_, index) => ({
-					length: ITEM_HEIGHT,
-					offset: ITEM_HEIGHT * index,
-					index,
-				})}
-				scrollEnabled={!disabled}
-				removeClippedSubviews={false} // Important for smooth programmatic scrolling
-			/>
-		</View>
-	);
-};
+const { ITEM_HEIGHT, CONTAINER_HEIGHT } = TIMER_CONSTANTS;
 
 export const MissionTimer = ({
 	isTorchOn,
@@ -106,11 +19,10 @@ export const MissionTimer = ({
 	setTimer,
 	remainingSeconds,
 }: MissionTimerProps) => {
-	const hours = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0'));
-	const minutes = Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0'));
-	const seconds = Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0'));
+	const hours = useMemo(() => Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0')), []);
+	const minutes = useMemo(() => Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0')), []);
+	const seconds = useMemo(() => Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0')), []);
 
-	// Determine which time components to display on the wheels
 	const displayTime = isTorchOn ? {
 		h: Math.floor(remainingSeconds / 3600),
 		m: Math.floor((remainingSeconds % 3600) / 60),
@@ -127,16 +39,6 @@ export const MissionTimer = ({
 
 	return (
 		<View style={styles.container}>
-			<View style={styles.header}>
-				<Text style={styles.title}>MISSION DURATION</Text>
-				<View style={styles.statusIndicatorRow}>
-					<View style={[styles.statusDot, isTorchOn && styles.statusDotActive]} />
-					<Text style={styles.subtitle}>
-						{isTorchOn ? 'COUNTDOWN IN PROGRESS' : 'OPERATOR INPUT REQUIRED'}
-					</Text>
-				</View>
-			</View>
-
 			<View style={styles.pickerWrapper}>
 				<View style={styles.selectionIndicator} />
 				<View style={styles.wheels}>
@@ -162,36 +64,18 @@ export const MissionTimer = ({
 					/>
 				</View>
 			</View>
-
-			<View style={styles.footerInfo}>
-				<Text style={styles.footerLabel}>CHRONO-STATUS:</Text>
-				<Text style={[styles.footerValue, isTorchOn && styles.footerValueActive]}>
-					{isTorchOn ? 'LOCKED & SYNCED' : 'READY FOR INPUT'}
-				</Text>
-			</View>
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
 	container: {
-		padding: 24,
-		backgroundColor: '#FFFFFF',
-		borderWidth: 3,
-		borderColor: '#1E2A3A',
-		shadowColor: '#1E2A3A',
-		shadowOffset: { width: 8, height: 8 },
-		shadowOpacity: 0.1,
-		shadowRadius: 0,
-		elevation: 4,
-	},
-	header: {
-		marginBottom: 24,
+		padding: 24
 	},
 	title: {
 		fontSize: 16,
 		fontWeight: '900',
-		color: '#1E2A3A',
+		color: COLORS.PRIMARY,
 		letterSpacing: 1.5,
 		fontFamily: Platform.select({ ios: 'Avenir Next Condensed', android: 'sans-serif-condensed' }),
 	},
@@ -204,15 +88,15 @@ const styles = StyleSheet.create({
 		width: 8,
 		height: 8,
 		borderRadius: 4,
-		backgroundColor: '#94A3B8',
+		backgroundColor: COLORS.SECONDARY,
 		marginRight: 8,
 	},
 	statusDotActive: {
-		backgroundColor: '#EF4444',
+		backgroundColor: COLORS.ACCENT_RED,
 	},
 	subtitle: {
 		fontSize: 11,
-		color: '#64748B',
+		color: COLORS.TEXT_LIGHT,
 		fontWeight: '800',
 		letterSpacing: 0.5,
 		textTransform: 'uppercase',
@@ -221,44 +105,21 @@ const styles = StyleSheet.create({
 		height: CONTAINER_HEIGHT,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#F1F5F9',
+		backgroundColor: COLORS.BACKGROUND_LIGHT,
 		borderRadius: 12,
 		overflow: 'hidden',
 		borderWidth: 2,
-		borderColor: '#1E2A3A',
+		borderColor: COLORS.PRIMARY,
 	},
 	wheels: {
 		flexDirection: 'row',
 		alignItems: 'center',
 		paddingHorizontal: 16,
 	},
-	wheelContainer: {
-		height: CONTAINER_HEIGHT,
-		width: 70,
-	},
-	disabledWheel: {
-		opacity: 0.8,
-	},
-	itemWrapper: {
-		height: ITEM_HEIGHT,
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	itemText: {
-		fontSize: 24,
-		fontWeight: '600',
-		color: '#94A3B8',
-		fontFamily: Platform.select({ ios: 'Courier New', android: 'monospace' }),
-	},
-	selectedItemText: {
-		color: '#1E2A3A',
-		fontSize: 32,
-		fontWeight: '900',
-	},
 	separator: {
 		fontSize: 32,
 		fontWeight: '900',
-		color: '#1E2A3A',
+		color: COLORS.PRIMARY,
 		marginHorizontal: 4,
 		paddingBottom: 4,
 	},
@@ -266,11 +127,11 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		height: ITEM_HEIGHT + 4,
 		width: '92%',
-		backgroundColor: '#FFFFFF',
+		backgroundColor: COLORS.WHITE,
 		borderRadius: 6,
 		borderWidth: 1.5,
-		borderColor: '#1E2A3A',
-		shadowColor: '#1E2A3A',
+		borderColor: COLORS.PRIMARY,
+		shadowColor: COLORS.PRIMARY,
 		shadowOffset: { width: 4, height: 4 },
 		shadowOpacity: 0.05,
 		shadowRadius: 0,
@@ -286,16 +147,16 @@ const styles = StyleSheet.create({
 	footerLabel: {
 		fontSize: 10,
 		fontWeight: '800',
-		color: '#64748B',
+		color: COLORS.TEXT_LIGHT,
 		letterSpacing: 1,
 	},
 	footerValue: {
 		fontSize: 10,
 		fontWeight: '900',
-		color: '#1E2A3A',
+		color: COLORS.PRIMARY,
 		letterSpacing: 1,
 	},
 	footerValueActive: {
-		color: '#EF4444',
+		color: COLORS.ACCENT_RED,
 	},
 });

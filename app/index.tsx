@@ -5,6 +5,7 @@ import { Background } from '../src/components/Background';
 import { Header } from '../src/components/Header';
 import { MissionTimer } from '../src/components/MissionTimer';
 import { TorchButton } from '../src/components/TorchButton';
+import { COLORS } from '../src/constants/theme';
 import { useTorch } from '../src/hooks/useTorch';
 
 export default function TorchHomeScreen() {
@@ -13,7 +14,6 @@ export default function TorchHomeScreen() {
 		timer,
 		setTimer,
 		remainingSeconds,
-		selectedDurationSeconds,
 		toggleTorch,
 	} = useTorch();
 
@@ -27,17 +27,22 @@ export default function TorchHomeScreen() {
 						isTorchOn={isTorchOn}
 						timer={timer}
 						setTimer={setTimer}
-						selectedDurationSeconds={selectedDurationSeconds}
 						remainingSeconds={remainingSeconds}
 					/>
+
+					<View style={styles.buttonSpacer} />
+
+					{/* Hardware Deactivation/Activation Controller */}
 					<TorchButton isTorchOn={isTorchOn} onToggle={toggleTorch} />
 				</View>
 
+				{/* System Identification Footer */}
 				<View style={styles.footerPanel}>
-					<Text style={styles.footerText}>SYS-ID TT-OPS-01</Text>
+					<Text style={styles.footerText}>SYSTEM: TT-OPS-PRIME</Text>
+					<Text style={styles.footerVersion}>V1.0.0-PRO</Text>
 				</View>
 			</View>
-		</SafeAreaView>
+		</SafeAreaView >
 	);
 }
 
@@ -53,36 +58,46 @@ const styles = StyleSheet.create({
 	},
 	mainPanel: {
 		flex: 1,
-		width: '100%',
+		borderColor: COLORS.PRIMARY,
+		padding: 18,
 		justifyContent: 'center',
 		alignItems: 'center',
-	},
-	panelHeader: {
-		marginBottom: 18,
 	},
 	panelTitle: {
 		fontSize: 14,
 		fontWeight: '800',
 		letterSpacing: 1.6,
-		color: '#1E2A3A',
+		color: COLORS.PRIMARY,
 		fontFamily: Platform.select({ ios: 'Avenir Next Condensed', android: 'sans-serif-condensed' }),
 	},
 	panelMeta: {
 		marginTop: 4,
 		fontSize: 12,
-		color: '#64748B',
+		color: COLORS.TEXT_LIGHT,
 		fontFamily: Platform.select({ ios: 'Avenir Next', android: 'sans-serif-medium' }),
 		letterSpacing: 0.4,
 	},
+	buttonSpacer: {
+		height: 20,
+	},
 	footerPanel: {
 		marginTop: 16,
-		alignItems: 'flex-end',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
 	},
 	footerText: {
 		fontSize: 12,
 		fontWeight: '700',
-		color: '#1E2A3A',
+		color: COLORS.PRIMARY,
 		fontFamily: Platform.select({ ios: 'Avenir Next Condensed', android: 'sans-serif-condensed' }),
+		letterSpacing: 1,
+	},
+	footerVersion: {
+		fontSize: 10,
+		fontWeight: '600',
+		color: COLORS.TEXT_LIGHT,
+		fontFamily: Platform.select({ ios: 'Avenir Next', android: 'sans-serif-medium' }),
 		letterSpacing: 1,
 	},
 });

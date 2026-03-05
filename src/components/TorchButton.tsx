@@ -1,12 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View, Pressable, Platform } from 'react-native';
+import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { COLORS } from '../constants/theme';
 
 interface TorchButtonProps {
 	isTorchOn: boolean;
 	onToggle: () => void;
 }
 
-export const TorchButton = ({ isTorchOn, onToggle }: TorchButtonProps) => {
+/**
+ * Hardware State Controller Button.
+ * Provides a tactile interface for toggling the torch hardware.
+ */
+export const TorchButton = React.memo(({ isTorchOn, onToggle }: TorchButtonProps) => {
 	return (
 		<Pressable
 			onPress={onToggle}
@@ -18,28 +23,27 @@ export const TorchButton = ({ isTorchOn, onToggle }: TorchButtonProps) => {
 		>
 			<View style={styles.buttonContent}>
 				<Text style={styles.buttonLabel}>
-					{isTorchOn ? 'DEACTIVATE TORCH' : 'ACTIVATE TORCH'}
-				</Text>
-				<Text style={styles.buttonSubLabel}>
-					{isTorchOn ? 'Intensity: Max' : 'Intensity: Ready'}
+					{isTorchOn ? 'TORCH OFF' : 'TORCH ON'}
 				</Text>
 			</View>
 		</Pressable>
 	);
-};
+});
+
+TorchButton.displayName = 'TorchButton';
 
 const styles = StyleSheet.create({
 	buttonBase: {
 		width: '100%',
 		height: 140,
 		borderWidth: 3,
-		borderColor: '#1E2A3A',
+		borderColor: COLORS.PRIMARY,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#FFFFFF',
+		backgroundColor: COLORS.WHITE,
 		bottom: 6,
 		right: 6,
-		shadowColor: '#1E2A3A',
+		shadowColor: COLORS.PRIMARY,
 		shadowOffset: { width: 6, height: 6 },
 		shadowOpacity: 0.2,
 		shadowRadius: 0,
@@ -53,7 +57,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#E7E2D6',
 	},
 	buttonOn: {
-		backgroundColor: '#BFE7D4',
+		backgroundColor: COLORS.ACCENT_GREEN,
 	},
 	buttonContent: {
 		alignItems: 'center',
@@ -61,7 +65,7 @@ const styles = StyleSheet.create({
 	buttonLabel: {
 		fontSize: 18,
 		fontWeight: '800',
-		color: '#0E1621',
+		color: COLORS.TEXT_DARK,
 		fontFamily: Platform.select({ ios: 'Avenir Next Condensed', android: 'sans-serif-condensed' }),
 		letterSpacing: 1.2,
 		textAlign: 'center',
@@ -69,7 +73,7 @@ const styles = StyleSheet.create({
 	},
 	buttonSubLabel: {
 		fontSize: 12,
-		color: '#4B5563',
+		color: COLORS.TEXT_LIGHT,
 		fontFamily: Platform.select({ ios: 'Avenir Next', android: 'sans-serif-medium' }),
 		letterSpacing: 0.6,
 		textTransform: 'uppercase',
