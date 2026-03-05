@@ -53,8 +53,7 @@ const styles = StyleSheet.create({
 	},
 	mainPanel: {
 		flex: 1,
-		backgroundColor: '#FDFBF7',
-		borderWidth: 3,
+		width: '100%',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},

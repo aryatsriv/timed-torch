@@ -22,8 +22,6 @@ const styles = StyleSheet.create({
 		height: 220,
 		borderRadius: 110,
 		backgroundColor: '#E7E0D2',
-		borderWidth: 2,
-		borderColor: '#D0C7B5',
 		opacity: 0.9,
 	},
 	backgroundBurst: {
@@ -32,7 +30,6 @@ const styles = StyleSheet.create({
 		bottom: -20,
 		width: 180,
 		height: 180,
-		borderRadius: 14,
 		backgroundColor: '#1E2A3A',
 		opacity: 0.08,
 		transform: [{ rotate: '8deg' }],

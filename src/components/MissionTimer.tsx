@@ -32,7 +32,7 @@ export const MissionTimer = ({
 		<View style={styles.timerSection}>
 			<View style={styles.timerHeaderRow}>
 				<Text style={styles.timerTitle}>MISSION TIMER</Text>
-				<Text style={styles.timerMeta}>Enter HH:MM:SS</Text>
+				<Text style={styles.timerMeta}>HH:MM:SS</Text>
 			</View>
 			<View style={styles.timerStatusRow}>
 				<Text style={styles.timerStatusLabel}>Selected</Text>
