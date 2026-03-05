@@ -38,6 +38,8 @@ export function useTorch() {
 	}, [isTorchOn, selectedDurationSeconds]);
 
 	useEffect(() => {
+		// Only run the countdown if the torch is on AND a duration was selected.
+		// If selectedDurationSeconds is 0, the torch stays on until manual toggle.
 		if (!isTorchOn || selectedDurationSeconds === 0) {
 			stopCountdown();
 			return;
