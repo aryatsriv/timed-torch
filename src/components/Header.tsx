@@ -1,10 +1,6 @@
 import React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 
-interface HeaderProps {
-	isTorchOn: boolean;
-}
-
 export const Header = () => {
 
 	return (
