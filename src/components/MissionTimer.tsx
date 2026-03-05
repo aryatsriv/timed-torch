@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { COLORS, TIMER_CONSTANTS } from '../constants/theme';
 import { TimerState } from '../types';
 import { WheelPicker } from './MissionTimer/WheelPicker';
@@ -38,9 +38,8 @@ export const MissionTimer = ({
 	const setSeconds = useCallback((s: number) => setTimer(prev => ({ ...prev, seconds: s })), [setTimer]);
 
 	return (
-		<View style={styles.container}>
+		<View>
 			<View style={styles.pickerWrapper}>
-				<View style={styles.selectionIndicator} />
 				<View style={styles.wheels}>
 					<WheelPicker
 						data={hours}
@@ -69,47 +68,11 @@ export const MissionTimer = ({
 };
 
 const styles = StyleSheet.create({
-	container: {
-		padding: 24
-	},
-	title: {
-		fontSize: 16,
-		fontWeight: '900',
-		color: COLORS.PRIMARY,
-		letterSpacing: 1.5,
-		fontFamily: Platform.select({ ios: 'Avenir Next Condensed', android: 'sans-serif-condensed' }),
-	},
-	statusIndicatorRow: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		marginTop: 6,
-	},
-	statusDot: {
-		width: 8,
-		height: 8,
-		borderRadius: 4,
-		backgroundColor: COLORS.SECONDARY,
-		marginRight: 8,
-	},
-	statusDotActive: {
-		backgroundColor: COLORS.ACCENT_RED,
-	},
-	subtitle: {
-		fontSize: 11,
-		color: COLORS.TEXT_LIGHT,
-		fontWeight: '800',
-		letterSpacing: 0.5,
-		textTransform: 'uppercase',
-	},
 	pickerWrapper: {
 		height: CONTAINER_HEIGHT,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: COLORS.BACKGROUND_LIGHT,
-		borderRadius: 12,
 		overflow: 'hidden',
-		borderWidth: 2,
-		borderColor: COLORS.PRIMARY,
 	},
 	wheels: {
 		flexDirection: 'row',
@@ -135,28 +98,5 @@ const styles = StyleSheet.create({
 		shadowOffset: { width: 4, height: 4 },
 		shadowOpacity: 0.05,
 		shadowRadius: 0,
-	},
-	footerInfo: {
-		marginTop: 20,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		borderTopWidth: 1,
-		borderTopColor: '#E2E8F0',
-		paddingTop: 12,
-	},
-	footerLabel: {
-		fontSize: 10,
-		fontWeight: '800',
-		color: COLORS.TEXT_LIGHT,
-		letterSpacing: 1,
-	},
-	footerValue: {
-		fontSize: 10,
-		fontWeight: '900',
-		color: COLORS.PRIMARY,
-		letterSpacing: 1,
-	},
-	footerValueActive: {
-		color: COLORS.ACCENT_RED,
 	},
 });

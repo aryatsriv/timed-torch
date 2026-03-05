@@ -32,13 +32,10 @@ export default function TorchHomeScreen() {
 
 					<View style={styles.buttonSpacer} />
 
-					{/* Hardware Deactivation/Activation Controller */}
 					<TorchButton isTorchOn={isTorchOn} onToggle={toggleTorch} />
 				</View>
 
-				{/* System Identification Footer */}
 				<View style={styles.footerPanel}>
-					<Text style={styles.footerText}>SYSTEM: TT-OPS-PRIME</Text>
 					<Text style={styles.footerVersion}>V1.0.0-PRO</Text>
 				</View>
 			</View>
