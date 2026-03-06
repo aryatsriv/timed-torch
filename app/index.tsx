@@ -11,9 +11,8 @@ import { useTorch } from '../src/hooks/useTorch';
 export default function TorchHomeScreen() {
 	const {
 		isTorchOn,
-		timer,
-		setTimer,
 		remainingSeconds,
+		setRemainingSeconds,
 		toggleTorch,
 	} = useTorch();
 
@@ -25,9 +24,8 @@ export default function TorchHomeScreen() {
 				<View style={styles.mainPanel}>
 					<MissionTimer
 						isTorchOn={isTorchOn}
-						timer={timer}
-						setTimer={setTimer}
 						remainingSeconds={remainingSeconds}
+						setRemainingSeconds={setRemainingSeconds}
 					/>
 
 					<View style={styles.buttonSpacer} />

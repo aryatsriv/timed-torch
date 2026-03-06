@@ -8,7 +8,6 @@ interface TorchButtonProps {
 }
 
 /**
- * Hardware State Controller Button.
  * Provides a tactile interface for toggling the torch hardware.
  */
 export const TorchButton = React.memo(({ isTorchOn, onToggle }: TorchButtonProps) => {
@@ -23,7 +22,7 @@ export const TorchButton = React.memo(({ isTorchOn, onToggle }: TorchButtonProps
 		>
 			<View style={styles.buttonContent}>
 				<Text style={styles.buttonLabel}>
-					{isTorchOn ? 'TORCH OFF' : 'TORCH ON'}
+					{isTorchOn ? 'STOP TORCH' : 'START TORCH'}
 				</Text>
 			</View>
 		</Pressable>

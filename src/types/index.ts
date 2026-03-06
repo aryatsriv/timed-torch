@@ -1,5 +1,1 @@
-export interface TimerState {
-	hours: number;
-	minutes: number;
-	seconds: number;
-}
+// Placeholder for future types
