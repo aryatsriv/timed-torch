@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { COLORS, TIMER_CONSTANTS } from '../constants/theme';
 import { WheelPicker } from './MissionTimer/WheelPicker';
@@ -11,19 +11,21 @@ interface MissionTimerProps {
 
 const { ITEM_HEIGHT, CONTAINER_HEIGHT } = TIMER_CONSTANTS;
 
+const HOURS_DATA = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0'));
+const MINUTES_DATA = Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0'));
+const SECONDS_DATA = Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0'));
+
 export const MissionTimer = ({
 	isTorchOn,
 	remainingSeconds,
 	setRemainingSeconds,
 }: MissionTimerProps) => {
-	const hours = useMemo(() => Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0')), []);
-	const minutes = useMemo(() => Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0')), []);
-	const seconds = useMemo(() => Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0')), []);
-
 	// Calculate current units directly from the source of truth
 	const h = Math.floor(remainingSeconds / 3600);
 	const m = Math.floor((remainingSeconds % 3600) / 60);
 	const s = remainingSeconds % 60;
+
+	console.log("timer" + remainingSeconds);
 
 	const handleValueChange = (newVal: number, unit: 'h' | 'm' | 's') => {
 		const newH = unit === 'h' ? newVal : h;
@@ -37,21 +39,21 @@ export const MissionTimer = ({
 			<View style={styles.pickerWrapper}>
 				<View style={styles.wheels}>
 					<WheelPicker
-						data={hours}
+						data={HOURS_DATA}
 						value={h}
 						onValueChange={(val) => handleValueChange(val, 'h')}
 						disabled={isTorchOn}
 					/>
 					<Text style={styles.separator}>:</Text>
 					<WheelPicker
-						data={minutes}
+						data={MINUTES_DATA}
 						value={m}
 						onValueChange={(val) => handleValueChange(val, 'm')}
 						disabled={isTorchOn}
 					/>
 					<Text style={styles.separator}>:</Text>
 					<WheelPicker
-						data={seconds}
+						data={SECONDS_DATA}
 						value={s}
 						onValueChange={(val) => handleValueChange(val, 's')}
 						disabled={isTorchOn}

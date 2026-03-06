@@ -8,7 +8,7 @@ import {
 	Text,
 	View,
 } from 'react-native';
-import { TIMER_CONSTANTS, COLORS } from '../../constants/theme';
+import { COLORS, TIMER_CONSTANTS } from '../../constants/theme';
 
 interface WheelPickerProps {
 	data: string[];
@@ -28,7 +28,6 @@ export const WheelPicker = React.memo(({
 	const flatListRef = useRef<FlatList>(null);
 	const isInitialMount = useRef(true);
 
-	// Add padding items for smooth scrolling
 	const extendedData = ['', ...data, ''];
 
 	// Sync scroll position with value changes (for countdown)
@@ -37,7 +36,7 @@ export const WheelPicker = React.memo(({
 			isInitialMount.current = false;
 			return;
 		}
-		
+
 		// When disabled (counting down), we programmatically scroll
 		if (disabled) {
 			flatListRef.current?.scrollToIndex({
