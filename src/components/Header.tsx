@@ -7,7 +7,7 @@ export const Header = () => {
 	return (
 		<View style={styles.headerPanel}>
 			<View style={styles.headerTitleRow}>
-				<Text style={styles.headerText}>TORCH KNIGHT</Text>
+				<Text style={styles.headerText}>TORCH WITH TIMER</Text>
 			</View>
 		</View>
 	);
