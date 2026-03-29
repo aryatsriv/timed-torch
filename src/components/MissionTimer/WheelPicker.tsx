@@ -30,23 +30,20 @@ export const WheelPicker = React.memo(({
 
 	const extendedData = ['', ...data, ''];
 
-	// Sync scroll position with value changes (for countdown)
+	// Sync scroll position with value changes
 	useEffect(() => {
 		if (isInitialMount.current) {
 			isInitialMount.current = false;
 			return;
 		}
-
-		// When disabled (counting down), we programmatically scroll
-		if (disabled) {
-			flatListRef.current?.scrollToIndex({
-				index: value,
-				animated: true,
-				viewPosition: 0,
-			});
-		}
-	}, [value, disabled]);
-
+		
+		// Programmatically scroll to the exact offset to center the selected item
+		// offset = value * ITEM_HEIGHT puts index 'value' at top and 'value + 1' in center
+		flatListRef.current?.scrollToOffset({
+			offset: value * ITEM_HEIGHT,
+			animated: true,
+		});
+	}, [value]);
 	const onMomentumScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
 		if (disabled) return;
 		const index = Math.round(event.nativeEvent.contentOffset.y / ITEM_HEIGHT);
