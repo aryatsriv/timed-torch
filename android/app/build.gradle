@@ -96,9 +96,9 @@ android {
         jvmTarget = '17'
     }
 
-    namespace 'com.aryat.timedtorch'
+    namespace 'com.octopotato.torchwithtimer'
     defaultConfig {
-        applicationId 'com.aryat.timedtorch'
+        applicationId 'com.octopotato.torchwithtimer'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

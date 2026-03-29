@@ -1,4 +1,4 @@
-package com.aryat.timedtorch
+package com.octopotato.torchwithtimer
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

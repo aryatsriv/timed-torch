@@ -7,7 +7,7 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>$(DEVELOPMENT_LANGUAGE)</string>
     <key>CFBundleDisplayName</key>
-    <string>timed-torch</string>
+    <string>Torch With Timer</string>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
@@ -27,14 +27,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>timedtorch</string>
-          <string>com.aryat.timedtorch</string>
-        </array>
-      </dict>
-      <dict>
-        <key>CFBundleURLSchemes</key>
-        <array>
-          <string>exp+timed-torch</string>
+          <string>torchwithtimer</string>
         </array>
       </dict>
     </array>

@@ -1,5 +1,5 @@
 {
-  "name": "timed-torch",
+  "name": "torch-with-timer",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {

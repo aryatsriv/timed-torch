@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "timed-torch",
-    "slug": "timed-torch",
+    "name": "Torch With Timer",
+    "slug": "torch-with-timer",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "timedtorch",
+    "scheme": "torchwithtimer",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.aryat.timedtorch"
+      "bundleIdentifier": "com.octopotato.torchwithtimer"
     },
     "android": {
       "adaptiveIcon": {
@@ -21,7 +21,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.aryat.timedtorch"
+      "package": "com.octopotato.torchwithtimer"
     },
     "web": {
       "output": "static",

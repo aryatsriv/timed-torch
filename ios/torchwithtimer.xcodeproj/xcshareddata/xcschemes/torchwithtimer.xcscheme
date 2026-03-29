@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "timedtorch.app"
-               BlueprintName = "timedtorch"
-               ReferencedContainer = "container:timedtorch.xcodeproj">
+               BuildableName = "torchwithtimer.app"
+               BlueprintName = "torchwithtimer"
+               ReferencedContainer = "container:torchwithtimer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "timedtorchTests.xctest"
-               BlueprintName = "timedtorchTests"
-               ReferencedContainer = "container:timedtorch.xcodeproj">
+               BuildableName = "torchwithtimerTests.xctest"
+               BlueprintName = "torchwithtimerTests"
+               ReferencedContainer = "container:torchwithtimer.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "timedtorch.app"
-            BlueprintName = "timedtorch"
-            ReferencedContainer = "container:timedtorch.xcodeproj">
+            BuildableName = "torchwithtimer.app"
+            BlueprintName = "torchwithtimer"
+            ReferencedContainer = "container:torchwithtimer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "timedtorch.app"
-            BlueprintName = "timedtorch"
-            ReferencedContainer = "container:timedtorch.xcodeproj">
+            BuildableName = "torchwithtimer.app"
+            BlueprintName = "torchwithtimer"
+            ReferencedContainer = "container:torchwithtimer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
