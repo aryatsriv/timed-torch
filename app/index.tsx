@@ -1,4 +1,5 @@
-import React from 'react';
+import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
+import React, { useEffect } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Background } from '../src/components/Background';
@@ -8,6 +9,8 @@ import { TorchButton } from '../src/components/TorchButton';
 import { COLORS } from '../src/constants/theme';
 import { useTorch } from '../src/hooks/useTorch';
 
+const TIMER_KEEP_AWAKE_TAG = 'torch-with-timeractive';
+
 export default function TorchHomeScreen() {
 	const {
 		isTorchOn,
@@ -15,6 +18,20 @@ export default function TorchHomeScreen() {
 		setRemainingSeconds,
 		toggleTorch,
 	} = useTorch();
+
+	useEffect(() => {
+		const shouldKeepAwake = isTorchOn;
+
+		if (shouldKeepAwake) {
+			activateKeepAwake(TIMER_KEEP_AWAKE_TAG);
+		} else {
+			deactivateKeepAwake(TIMER_KEEP_AWAKE_TAG);
+		}
+
+		return () => {
+			deactivateKeepAwake(TIMER_KEEP_AWAKE_TAG);
+		};
+	}, [isTorchOn]);
 
 	return (
 		<SafeAreaView style={styles.safeArea}>
